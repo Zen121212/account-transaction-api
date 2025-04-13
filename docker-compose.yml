@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: accounts_transactions
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh # 👈 init script for second DB
+  backend:
+    build: .
+    container_name: account-api_backend
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:mysecretpassword@postgres_db:5432/accounts_transactions
+      MODULE_NAME: main # Ensure this matches the filename of your FastAPI app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: [
+        "wait-for-it",
+        "postgres_db:5432", # Check for PostgreSQL readiness
+        "--",
+        "uvicorn",
+        "app.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+      ]
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5051:80"
+    depends_on:
+      - db
+volumes:
+  postgres_data:
+networks:
+  mynetwork:
+    driver: bridge

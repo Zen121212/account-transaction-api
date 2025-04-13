@@ -39,8 +39,8 @@ A RESTful API built with FastAPI to manage user accounts and transactions. It su
 1. Clone the repo:
 
 ```bash
-git clone https://github.com/yourusername/your-repo.git
-cd your-repo
+git clone https://github.com/Zen121212/account-transaction-api.git
+cd account-transaction-api
 ```
 
 2. Start the containers:

@@ -56,6 +56,29 @@ cd account-transaction-api
 
 4. Access pgAdmin: [http://localhost:5051](http://localhost:5051)
 
+### pgAdmin 4 Setup:
+
+After starting the Docker containers, you can configure pgAdmin to interact with PostgreSQL database.
+
+1. **Access pgAdmin 4**: Open your browser and go to [http://localhost:5051](http://localhost:5051).
+
+2. **Log in**: The default credentials for pgAdmin 4 are:
+
+   - **Username**: `admin@admin.com`
+   - **Password**: `admin123`
+
+3. **Register Server**:
+
+   - **Name**: Enter a name for your server, e.g., `Postgres Server`.
+   - **Connection Tab**:
+     - **Hostname/address**: Enter `postgres_db`.
+     - **Port**: Enter `5432`.
+     - **Maintenance database**: Enter `postgres`.
+     - **Username**: Enter `postgres`.
+     - **Password**: Enter `mysecretpassword`.
+
+4. **Save**: Click `Save` to register the server. You should now be able to interact with your PostgreSQL database via pgAdmin.
+
 ---
 
 ## API Endpoints

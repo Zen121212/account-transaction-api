@@ -21,7 +21,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://postgres:mysecretpassword@postgres_db:5432/accounts_transactions
+      DATABASE_URL: postgresql://postgres:mysecretpassword@postgres_db:5432/accounts_transactions_test
       MODULE_NAME: main # Ensure this matches the filename of your FastAPI app
     ports:
       - "8000:8000"

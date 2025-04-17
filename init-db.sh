@@ -23,7 +23,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname="accounts_transacti
 
   CREATE TABLE transactions (
     id SERIAL PRIMARY KEY,
-    account_id INTEGER NOT NULL REFERENCES account(id) ON DELETE CASCADE,
+    account_id INTEGER NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
     amount NUMERIC NOT NULL,
     transaction_type VARCHAR(50) NOT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
